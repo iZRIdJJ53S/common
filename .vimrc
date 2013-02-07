@@ -20,6 +20,10 @@ highlight SpecialKey cterm=underline ctermfg=darkgrey
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=white
 match ZenkakuSpace /　/
 
+" vimdiff用の設定
+highlight DiffAdd  ctermfg=black ctermbg=1
+highlight DiffText ctermfg=black ctermbg=7
+
 
 " タブ幅
 set ts=4 sw=4
@@ -48,7 +52,7 @@ set smartcase
 " その他
 " -------------------
 " マウス機能有効化
-set mouse=a
+" set mouse=a
 
 "set notitle
 "set autowrite

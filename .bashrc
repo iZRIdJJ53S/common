@@ -6,9 +6,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
+export GREP_OPTIONS='--color=auto' # grep は常にカラーモードON
+
 alias sudo="sudo "
-alias vi="vim"
-alias grep="grep --color" # grep は常にカラーモードON
 alias diff="colordiff"
 
 # history コマンド実行日時を記録するフォーマット

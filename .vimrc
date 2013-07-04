@@ -73,3 +73,6 @@ set laststatus=2
 " 括弧対応の拡張機能
 source $VIMRUNTIME/macros/matchit.vim
 
+" ftplugin有効 (hilighter)
+filetype plugin on
+

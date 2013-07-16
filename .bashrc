@@ -16,3 +16,10 @@ HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
 HISTSIZE=10000 # 履歴保持件数
 
 
+# cd した後にls もついでに実行する
+function cdls() {
+  # cd がalias でループするので\をつける
+  \cd $1;
+  ls -l;
+}
+alias cd=cdls

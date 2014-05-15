@@ -21,8 +21,11 @@ highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=white
 match ZenkakuSpace /　/
 
 " vimdiff用の設定
-highlight DiffAdd  ctermfg=black ctermbg=1
-highlight DiffText ctermfg=black ctermbg=7
+" @see http://d.hatena.ne.jp/connvoi_tyou/20080306/1204825179
+"highlight DiffAdd     ctermfg=black ctermbg=brown
+highlight DiffChange  term=bold ctermbg=lightred
+"""highlight DiffDelete  ctermfg=black ctermbg=brown
+highlight DiffText    ctermfg=black ctermbg=gray
 
 
 " タブ幅
@@ -31,14 +34,28 @@ set softtabstop=4
 "set expandtab
 
 " -------------------
+" キーバインド
+" -------------------
+" Ctrl + d でdelete
+noremap <C-d> <Del>
+inoremap <C-d> <Del>
+" Ctrl + a で行頭へ
+noremap <C-a> <Home>
+inoremap <C-a> <Home>
+" Ctrl + e で行末へ
+noremap <C-e> <End>
+inoremap <C-e> <End>
+
+
+" -------------------
 " 検索
 " -------------------
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する(noignorecase)
 set ignorecase
 " 検索文字列に大文字が含まれている場合は区別して検索する(nosmartcase)
 set smartcase
-" 検索文字のハイライトをしない
-"set nohlsearch
+" 検索文字のハイライトをする
+set hlsearch
 " インクリメンタルサーチ
 "set incsearch
 " 補完時の一覧表示機能有効化
@@ -69,10 +86,4 @@ set listchars=tab:\ \ ,extends:<,trail:\
 " ステータスラインを常に表示
 set laststatus=2
 "set directory=/tmp
-
-" 括弧対応の拡張機能
-source $VIMRUNTIME/macros/matchit.vim
-
-" ftplugin有効 (hilighter)
-filetype plugin on
 

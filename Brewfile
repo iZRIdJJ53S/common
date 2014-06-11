@@ -26,7 +26,7 @@ install wget
 install curl
 install jq
 install vim
-install docker
+###install docker
 ###install boot2docker
 install reattach-to-user-namespace
 ###install php55 --with-pgsql --with-pdo-pgsql
@@ -41,6 +41,7 @@ cask install vagrant
 cask install dropbox
 cask install evernote
 ###cask install github
+cask install boot2docker
 cask install bettertouchtool
 cask install google-japanese-ime
 cask install the-unarchiver

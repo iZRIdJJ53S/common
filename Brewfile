@@ -2,7 +2,8 @@ update
 upgrade
 
 tap homebrew/versions
-tap phinze/homebrew-cask
+###tap phinze/homebrew-cask
+tap caskroom/cask
 tap homebrew/binary
 tap josegonzalez/php
 

@@ -18,6 +18,8 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/local/ruby-2.1/bin:/us
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
+export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
+
 
 # -------------------------------------
 # ls のカラー設定

@@ -5,14 +5,21 @@ tap homebrew/versions
 ###tap phinze/homebrew-cask
 tap caskroom/cask
 tap homebrew/binary
-tap josegonzalez/php
+###tap josegonzalez/php
+
+# Similar, percol
+# https://github.com/mooz/percol
+tap lestrrat/peco
 
 install brew-cask
+install peco
 #
 # coreutils: gnu (Linux系)のコマンドを使えるようにする。dateコマンドとか
 #
 install coreutils
 
+install bash-completion
+install zsh-completions
 install tree
 install zsh
 install autojump

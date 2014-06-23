@@ -18,12 +18,25 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/local/ruby-2.1/bin:/us
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
+# Docker
 export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
 
 
 # -------------------------------------
-# ls のカラー設定
+# history
 # -------------------------------------
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+
+# 重複を記録しない
+setopt hist_ignore_dups
+
 
 # -------------------------------------
 # zshのオプション
@@ -47,9 +60,6 @@ setopt ignoreeof
 
 ## バックグラウンドジョブが終了したらすぐに知らせる。
 setopt no_tify
-
-## 直前と同じコマンドをヒストリに追加しない
-setopt hist_ignore_dups
 
 # 補完
 ## タブによるファイルの順番切り替えをしない
@@ -179,7 +189,7 @@ bindkey "^b" backward-word
 # -------------------------------------
 
 # cdしたあとで、自動的に ls する
-function chpwd() { ls -1 }
+function chpwd() { ll }
 
 # iTerm2のタブ名を変更する
 function title {
@@ -222,3 +232,20 @@ route () {
   net_tools_deprecated_message
   echo 'Use `ip r`'
 }
+
+
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER")
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history

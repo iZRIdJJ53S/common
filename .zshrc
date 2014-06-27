@@ -135,7 +135,7 @@ RPROMPT="[%*]"
 # -------------------------------------
 
 # -n 行数表示, -I バイナリファイル無視, git関係のファイルを無視
-alias grep="grep --color -n -I --exclude='*.git-*' --exclude='entries' --exclude='*/cache/*'"
+alias grep="grep --color -I --exclude='*.git-*' --exclude='entries' --exclude='*/cache/*'"
 
 # ls
 if [ -d /usr/local/opt/coreutils/libexec/gnubin ] ; then
@@ -200,40 +200,42 @@ function title {
 #
 # net-tools コマンドの非推奨対応
 #
-net_tools_deprecated_message () {
-  echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
-}
+###net_tools_deprecated_message () {
+###  echo -n 'net-tools コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
+###}
+###
+###arp () {
+###  net_tools_deprecated_message
+###  echo 'Use `ip n`'
+###}
+###ifconfig () {
+###  net_tools_deprecated_message
+###  echo 'Use `ip a`, `ip link`, `ip -s link`'
+###}
+###iptunnel () {
+###  net_tools_deprecated_message
+###  echo 'Use `ip tunnel`'
+###}
+###iwconfig () {
+###  echo -n 'iwconfig コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
+###  echo 'Use `iw`'
+###}
+###nameif () {
+###  net_tools_deprecated_message
+###  echo 'Use `ip link`, `ifrename`'
+###}
+####netstat () {
+####  net_tools_deprecated_message
+####  echo 'Use `ss`, `ip route` (for netstat -r), `ip -s link` (for netstat -i), `ip maddr` (for netstat -g)'
+####}
+###route () {
+###  net_tools_deprecated_message
+###  echo 'Use `ip r`'
+###}
 
-arp () {
-  net_tools_deprecated_message
-  echo 'Use `ip n`'
-}
-ifconfig () {
-  net_tools_deprecated_message
-  echo 'Use `ip a`, `ip link`, `ip -s link`'
-}
-iptunnel () {
-  net_tools_deprecated_message
-  echo 'Use `ip tunnel`'
-}
-iwconfig () {
-  echo -n 'iwconfig コマンドはもう非推奨ですよ？おじさんなんじゃないですか？ '
-  echo 'Use `iw`'
-}
-nameif () {
-  net_tools_deprecated_message
-  echo 'Use `ip link`, `ifrename`'
-}
-netstat () {
-  net_tools_deprecated_message
-  echo 'Use `ss`, `ip route` (for netstat -r), `ip -s link` (for netstat -i), `ip maddr` (for netstat -g)'
-}
-route () {
-  net_tools_deprecated_message
-  echo 'Use `ip r`'
-}
-
-
+#
+# peco
+#
 function peco-select-history() {
     local tac
     if which tac > /dev/null; then
@@ -249,3 +251,15 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+
+#
+# snippets
+# @see http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/
+#
+function peco-snippets() {
+    local SNIPPETS=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER" | pbcopy)
+    zle clear-screen
+}
+zle -N peco-snippets
+bindkey '^x^x' peco-snippets

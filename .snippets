@@ -1,0 +1,37 @@
+# apache
+tail -5000 /usr/local/apache2/logs/access_log | awk '{print $1}'  | sort | uniq -c | sort -gr | head -5
+tail -5000 /usr/local/apache2/logs/access_log | awk '{print $2}'  | sort | uniq -c | sort -gr | head -5
+tail -5000 /usr/local/apache2/logs/access_log | awk '{print $12}' | sort | uniq -c | sort -gr | head -5
+tail -5000 /usr/local/apache2/logs/access_log | awk '{print $13}' | sort | uniq -c | sort -gr | head -5
+
+# network search
+netstat -tapn | grep ESTABLISHED | more
+netstat -tan | grep ":80 " | awk '{print $5}' | awk -F : '{print $4}' | sort | uniq -c | sort -nr | head
+lsof -i:80
+
+# dstat
+dstat -tclmdrn
+dstat --top-cpu --top-cputime
+dstat --top-io --top-bio
+dstat --top-cpu --top-cputime --top-io --top-mem
+
+# openssl
+openssl x509 -noout -modulus -in *.crt | openssl md5
+openssl rsa  -noout -modulus -in *.key | openssl md5
+openssl req  -noout -modulus -in *.csr | openssl md5
+
+# find
+# atime … 最終アクセス時刻 (access time)
+# mtime … 最終変更時刻 (modify time)
+# ctime … 最終ステータス変更時刻 (change time)
+find ./ -daystart -ctime +2
+find ./ -daystart -ctime -2
+
+# とあるファイルの更新時刻を基準に検索
+find ./ -type f -newer /tmp/_file
+
+
+# date
+date +%Y%m%d
+date +%s --date "2005-01-01 00:00"
+date --date "@1104505200"

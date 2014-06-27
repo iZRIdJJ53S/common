@@ -258,8 +258,9 @@ bindkey '^r' peco-select-history
 # @see http://blog.glidenote.com/blog/2014/06/26/snippets-peco-percol/
 #
 function peco-snippets() {
-    local SNIPPETS=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER" | pbcopy)
+    local SNIPPETS=$(grep -v "^#" ~/.snippets | peco --query "$LBUFFER" | tr -d "\n" | pbcopy)
     zle clear-screen
 }
 zle -N peco-snippets
 bindkey '^x^x' peco-snippets
+

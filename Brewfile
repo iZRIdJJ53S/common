@@ -52,4 +52,5 @@ cask install boot2docker
 cask install bettertouchtool
 cask install google-japanese-ime
 cask install the-unarchiver
+cask install limechat
 cask install catchmouse

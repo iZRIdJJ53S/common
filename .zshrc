@@ -269,7 +269,7 @@ bindkey '^x^x' peco-snippets
 # google cloud SDK
 #
 # The next line updates PATH for the Google Cloud SDK.
-source '/Users/yukihiko_saito/google-cloud-sdk/path.zsh.inc'
+source '~/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables bash completion for gcloud.
-source '/Users/yukihiko_saito/google-cloud-sdk/completion.zsh.inc'
+source '~/google-cloud-sdk/completion.zsh.inc'

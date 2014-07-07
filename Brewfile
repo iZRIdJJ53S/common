@@ -33,8 +33,7 @@ install wget
 install curl
 install jq
 install vim
-###install docker
-###install boot2docker
+install colordiff
 install reattach-to-user-namespace
 ###install php55 --with-pgsql --with-pdo-pgsql
 ###install php55-mcrypt php55-xdebug php55-opcache composer

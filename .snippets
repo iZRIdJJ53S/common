@@ -18,6 +18,13 @@ lsof -i:80
 # 外に出て行くグローバルIPを知りたい時
 curl http://checkip.dyndns.com/
 
+# 複数のデバイスがあるとき、どれかを知る (NIC の LED を点滅させる)
+ethtool -p eth0
+
+# tcpdump -s0 はキャプチャ量の制限無し
+tcpdump -i eth0 -A port 80
+tcpdump -s0 -A port 80 and host www.google.co.jp
+
 # dstat
 dstat -tclmdrn
 dstat --top-cpu --top-cputime
@@ -32,13 +39,15 @@ openssl req  -noout -modulus -in *.csr | openssl md5
 # ランダムパスワード生成
 openssl rand -base64 [n]
 
+# git 更新のあったファイル一覧を見たいとき
+git log --name-status --oneline
 
 # find
 # atime … 最終アクセス時刻 (access time)
 # mtime … 最終変更時刻 (modify time)
 # ctime … 最終ステータス変更時刻 (change time)
-find ./ -daystart -ctime +2
-find ./ -daystart -ctime -2
+find ./ -daystart -mtime +2
+find ./ -daystart -mtime -2
 
 # とあるファイルの更新時刻を基準に検索
 find ./ -type f -newer /tmp/_file
@@ -65,6 +74,12 @@ mysqldump -uroot -p --default-character-set=utf8 --single-transaction --master-d
 select user,host from mysql.user;
 # mysql CHANGE MASTER TO
 CHANGE MASTER TO MASTER_HOST='', MASTER_USER='', MASTER_PASSWORD='XXXXX', MASTER_LOG_FILE='mysql-bin.XXXXX', MASTER_LOG_POS=XXXXXX;
+# mysqladmin processlist
+mysqladmin -uroot -p processlist
+# general_log の出力
+SET GLOBAL general_log='on';
+# mysqldumpslow
+mysqldumpslow -s t /var/lib/mysql/mysql-slow.log
 
 
 # xml構文のチェック
@@ -72,3 +87,9 @@ xmllint --noout file.xml
 
 # 開いてるファイルでサイズが大きいのはどれ？
 lsof / | awk '{ if($7 > 1048576) print $7/1048576 "MB "$9 }' | sort -n -u | tail
+
+# awk で足し算
+awk '{print sum+=$1}' hoge.txt
+
+# macos のDNSキャッシュクリア
+sudo dscacheutil -flushcache

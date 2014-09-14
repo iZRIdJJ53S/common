@@ -53,3 +53,6 @@ cask install google-japanese-ime
 cask install the-unarchiver
 cask install limechat
 cask install catchmouse
+cask install XQuartz
+cask install wireshark
+

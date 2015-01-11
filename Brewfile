@@ -35,6 +35,7 @@ install jq
 install vim
 install colordiff
 install reattach-to-user-namespace
+install ffmpeg
 ###install php55 --with-pgsql --with-pdo-pgsql
 ###install php55-mcrypt php55-xdebug php55-opcache composer
 

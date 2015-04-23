@@ -37,6 +37,7 @@ install colordiff
 install reattach-to-user-namespace
 install mobile-shell
 install ffmpeg
+install python
 ###install php55 --with-pgsql --with-pdo-pgsql
 ###install php55-mcrypt php55-xdebug php55-opcache composer
 

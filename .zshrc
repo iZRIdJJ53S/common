@@ -13,8 +13,13 @@ export EDITOR=/usr/local/bin/vim
 #export PAGER=/usr/local/bin/vimpager
 #export MANPAGER=/usr/local/bin/vimpager
 
+# GOPATH
+export GOPATH=$HOME/golang/third-party
+
 # PATH
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$HOME/local/ruby-2.1/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH=$PATH:$HOME/golang/third-party/bin
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
@@ -126,7 +131,7 @@ PROMPT+="%F{blue}%~%f"
 PROMPT+="\$(vcs_prompt_info)"
 PROMPT+="
 "
-PROMPT+="%% "
+PROMPT+="[%m]%% "
 
 RPROMPT="[%*]"
 
@@ -269,7 +274,7 @@ bindkey '^x^x' peco-snippets
 # google cloud SDK
 #
 # The next line updates PATH for the Google Cloud SDK.
-source "${HOME}/google-cloud-sdk/path.zsh.inc"
+source "${HOME}/google-cloud-sdk/path.zsh.edit.inc"
 
 # The next line enables zsh completion for gcloud.
 source "${HOME}/google-cloud-sdk/completion.zsh.inc"

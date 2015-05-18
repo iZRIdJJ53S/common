@@ -4,11 +4,28 @@ tail -5000 /usr/local/apache2/logs/access_log | awk '{print $2}'  | sort | uniq 
 tail -5000 /usr/local/apache2/logs/access_log | awk '{print $12}' | sort | uniq -c | sort -gr | head -5
 tail -5000 /usr/local/apache2/logs/access_log | awk '{print $13}' | sort | uniq -c | sort -gr | head -5
 
+# varnishログを確認する
+/usr/local/varnish/bin/varnishncsa
+
 # diff 差分ファイル名だけ表示
 diff -q -r ${src} ${dst}
 
+# 横表示のdiff
+#   -s 差分のある所だけ表示
+#   -t タブをスペースで出力
+sdiff -st --width=180 ${src} ${dst}
+
 # ファイルのここからここまでを取得したい
 sed -n '50,60p' [file_name]
+
+# ディスク使用率の多い順ソート
+du -s /home/* | sort -nr | head -30
+
+# ゆっくり処理したい
+ionice -c3 nice -n 19 ${command}
+
+# リモートサーバーに直接ファイルを書き込む(tar で圧縮しながら)
+tar -zc ./path | ssh server2 "cat > ~/file.tar.gz"
 
 
 # network search
@@ -18,12 +35,26 @@ lsof -i:80
 # 外に出て行くグローバルIPを知りたい時
 curl http://checkip.dyndns.com/
 
+# memcache netcat nc
+# echo "${memcache のコマンド}" パイプで対象サーバーに渡す
+echo "get usericon_upload_locked_44189903" | nc hogehost 11411
+
+# slabs 一覧取得
+echo 'stats items' | nc hogehost 11212
+# key 一覧取得　「slabID = 1」// 取得したい件数=10
+echo 'stats cachedump 1 10' | nc hogehost 11212
+
+
+
 # 複数のデバイスがあるとき、どれかを知る (NIC の LED を点滅させる)
 ethtool -p eth0
 
 # tcpdump -s0 はキャプチャ量の制限無し
 tcpdump -i eth0 -A port 80
 tcpdump -s0 -A port 80 and host www.google.co.jp
+# outbound 外部通信を知りたい時
+tcpdump -ni ${INTERFACE} tcp[13] == 2 and src host ${MYIP} and dst port 80 or dst port 443
+
 
 # dstat
 dstat -tclmdrn
@@ -90,6 +121,11 @@ lsof / | awk '{ if($7 > 1048576) print $7/1048576 "MB "$9 }' | sort -n -u | tail
 
 # awk で足し算
 awk '{print sum+=$1}' hoge.txt
+
+# ssh you must have a tty to run sudo
+ssh -t $host "sudo ls -l"
+# nocheck strict
+ssh -o StrictHostKeyChecking=no
 
 # macos のDNSキャッシュクリア
 sudo dscacheutil -flushcache

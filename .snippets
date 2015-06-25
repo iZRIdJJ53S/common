@@ -45,6 +45,11 @@ echo 'stats items' | nc hogehost 11212
 echo 'stats cachedump 1 10' | nc hogehost 11212
 
 
+# bonding の切り替え試験
+# @see http://alpha-netzilla.blogspot.jp/2011/03/blog-post.html
+cat /proc/net/bonding/bond0
+ifenslave -c bond0 eth1
+
 
 # 複数のデバイスがあるとき、どれかを知る (NIC の LED を点滅させる)
 ethtool -p eth0
@@ -128,4 +133,4 @@ ssh -t $host "sudo ls -l"
 ssh -o StrictHostKeyChecking=no
 
 # macos のDNSキャッシュクリア
-sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder

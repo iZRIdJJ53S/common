@@ -28,19 +28,16 @@ install ctags
 install tmux
 install tig
 install nkf
-install ansible
 install wget
 install curl
 install jq
 install vim
 install colordiff
 install reattach-to-user-namespace
-install mobile-shell
+###install mobile-shell
 install ffmpeg
-install python
+###install python
 install go
-###install php55 --with-pgsql --with-pdo-pgsql
-###install php55-mcrypt php55-xdebug php55-opcache composer
 
 cask install iterm2
 cask install google-chrome
@@ -52,12 +49,11 @@ cask install vagrant
 cask install evernote
 cask install skitch
 ###cask install github
-cask install boot2docker
+###cask install boot2docker
 cask install bettertouchtool
 cask install google-japanese-ime
-cask install the-unarchiver
-cask install limechat
+###cask install the-unarchiver
 ###cask install catchmouse
-cask install macdown
-cask install XQuartz
-cask install wireshark
+###cask install macdown
+###cask install XQuartz
+###cask install wireshark

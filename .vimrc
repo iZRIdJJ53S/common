@@ -87,3 +87,5 @@ set listchars=tab:\ \ ,extends:<,trail:\
 set laststatus=2
 "set directory=/tmp
 
+" mac でbackspace を効かせる設定
+set backspace=start,eol,indent

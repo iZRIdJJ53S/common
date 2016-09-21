@@ -33,6 +33,7 @@ netstat -tapn | grep ESTABLISHED | more
 netstat -tan | grep ":80 " | awk '{print $5}' | awk -F : '{print $4}' | sort | uniq -c | sort -nr | head
 lsof -i:80
 # 外に出て行くグローバルIPを知りたい時
+curl http://checkip.amazonaws.com/
 curl http://checkip.dyndns.com/
 
 # memcache netcat nc
@@ -106,17 +107,22 @@ SELECT table_name,engine FROM information_schema.tables WHERE table_schema = 'ni
 CREATE TABLE usermaster_cs LIKE usermaster;
 # mysqldump
 mysqldump -uroot -p --default-character-set=utf8 --single-transaction --master-data=2 --hex-blob niwavide | gzip > hoge.sql.gz
+# mysqldump --no-data // テーブル定義だけ
+mysqldump -uroot -p --no-data > ${hostname}-dump.sql
 # mysql user list
 select user,host from mysql.user;
 # mysql CHANGE MASTER TO
 CHANGE MASTER TO MASTER_HOST='', MASTER_USER='', MASTER_PASSWORD='XXXXX', MASTER_LOG_FILE='mysql-bin.XXXXX', MASTER_LOG_POS=XXXXXX;
+# mysql CHANGE MASTER TO via GTID
+CHANGE MASTER TO MASTER_HOST='', MASTER_USER='', MASTER_PASSWORD='XXXXX', MASTER_AUTO_POSITION = 1;
 # mysqladmin processlist
 mysqladmin -uroot -p processlist
 # general_log の出力
 SET GLOBAL general_log='on';
 # mysqldumpslow
 mysqldumpslow -s t /var/lib/mysql/mysql-slow.log
-
+# mysqlbinlog
+mysqlbinlog --start-datetime="2015-10-28 14:58:56" /tmp/mysql-bin.000532
 
 # xml構文のチェック
 xmllint --noout file.xml
@@ -134,3 +140,4 @@ ssh -o StrictHostKeyChecking=no
 
 # macos のDNSキャッシュクリア
 sudo killall -HUP mDNSResponder
+

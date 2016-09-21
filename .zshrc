@@ -133,7 +133,7 @@ PROMPT+="
 "
 PROMPT+="[%m]%% "
 
-RPROMPT="[%*]"
+###RPROMPT="[%*]"
 
 # -------------------------------------
 # エイリアス
@@ -278,3 +278,4 @@ source "${HOME}/google-cloud-sdk/path.zsh.edit.inc"
 
 # The next line enables zsh completion for gcloud.
 source "${HOME}/google-cloud-sdk/completion.zsh.inc"
+
